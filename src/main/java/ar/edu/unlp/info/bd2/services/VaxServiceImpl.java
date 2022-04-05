@@ -28,7 +28,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Transactional
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
-		Patient patient = new Patient(email, fullname, password, dayOfBirth);
+		Patient patient = new Patient(email, password, fullname, dayOfBirth);
 		try {
 			repository.save(patient);
 		}
