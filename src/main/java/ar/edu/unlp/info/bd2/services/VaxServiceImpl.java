@@ -69,7 +69,7 @@ public class VaxServiceImpl implements VaxService{
 	 * @return
 	 */
 	public Optional<Patient> getPatientByEmail(String email){
-		return null;
+		return Optional.ofNullable(this.repository.findPatientByEmail(email));
 	}
 
 
