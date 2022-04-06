@@ -38,14 +38,16 @@ public class VaxServiceImpl implements VaxService{
 		return patient;
 	}
 
-	/**
-	 *
-	 * @param name nombre de la vacuna
-	 * @return la vacuna creada
-	 * @throws VaxException
-	 */
+	@Transactional
 	public Vaccine createVaccine(String name) throws VaxException{
-		return null;
+		Vaccine vaccine = new Vaccine(name);
+		try {
+			repository.save(vaccine);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return vaccine;
 	}
 
 	/**
@@ -73,13 +75,8 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 
-	/**
-	 *
-	 * @param name nombre de la vacuna
-	 * @return
-	 */
 	public Optional<Vaccine> getVaccineByName(String name){
-		return null;
+		return Optional.ofNullable(this.repository.findVaccineByName(name));
 	}
 
 	/**
