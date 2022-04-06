@@ -1,6 +1,8 @@
 package ar.edu.unlp.info.bd2.repositories;
 
 import javax.persistence.Query;
+
+import ar.edu.unlp.info.bd2.model.Centre;
 import ar.edu.unlp.info.bd2.model.Patient;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import org.hibernate.Session;
@@ -40,5 +42,12 @@ public class VaxRepository{
         query.setParameter("name", name);
         List<Vaccine> vaccines = query.getResultList();
         return !vaccines.isEmpty() ? vaccines.get(query.getFirstResult()) : null;
+    }
+
+    public Centre findCentreByName(String name) {
+        Query query = getSession().createQuery("from Centre where name = :name");
+        query.setParameter("name", name);
+        List<Centre> centres = query.getResultList();
+        return !centres.isEmpty() ? centres.get(query.getFirstResult()) : null;
     }
 }

@@ -28,6 +28,10 @@ public class ShotCertificate {
     public ShotCertificate() {
     }
 
+    public ShotCertificate(Date date) {
+        this.date = date;
+    }
+
     public UUID getSerialNumber() {
         return serialNumber;
     }

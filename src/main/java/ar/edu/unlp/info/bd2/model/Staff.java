@@ -64,4 +64,8 @@ public class Staff {
     public void setCentres(Set<Centre> centres) {
         this.centres = centres;
     }
+
+    public void addCentre(Centre centre){
+        this.centres.add(centre);
+    }
 }

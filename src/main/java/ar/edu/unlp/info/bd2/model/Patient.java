@@ -79,6 +79,10 @@ public class Patient {
         this.email = email;
     }
 
+    public void addShot(Shot shot){
+        shots.add(shot);
+    }
+
     public Set<Shot> getShots() {
         return shots;
     }

@@ -51,6 +51,7 @@ public class Centre {
     }
 
     public void addStaff(Staff staff) {
-        this.staffs.add(staff);
+        staffs.add(staff);
+        staff.addCentre(this);
     }
 }

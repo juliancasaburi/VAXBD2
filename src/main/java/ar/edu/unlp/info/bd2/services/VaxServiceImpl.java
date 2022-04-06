@@ -50,54 +50,48 @@ public class VaxServiceImpl implements VaxService{
 		return vaccine;
 	}
 
-	/**
-	 *
-	 * @param patient paciente vacunado
-	 * @param vaccine vacuna aplicada
-	 * @param date fecha de aplicación
-	 * @param centre el centro de vacunación donde se aplicó
-	 * @param nurse enfermero/a que aplico la vacuna
-	 * @return el usuario creado
-	 * @throws VaxException
-	 */
+	@Transactional
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
-		return null;
+		Shot shot = new Shot(patient, vaccine, date, centre, nurse);
+		try {
+			repository.save(shot);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return shot;
 	}
 
-
-	/**
-	 *
-	 * @param email email del usuario
-	 * @return
-	 */
 	public Optional<Patient> getPatientByEmail(String email){
 		return Optional.ofNullable(this.repository.findPatientByEmail(email));
 	}
-
 
 	public Optional<Vaccine> getVaccineByName(String name){
 		return Optional.ofNullable(this.repository.findVaccineByName(name));
 	}
 
-	/**
-	 *
-	 * @param name nombre del centro de vacunación
-	 * @return el centro de vacunación nuevo
-	 * @throws VaxException
-	 */
+	@Transactional
 	public Centre createCentre(String name) throws VaxException{
-		return null;
+		Centre centre = new Centre(name);
+		try {
+			repository.save(centre);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return centre;
 	}
 
-	/**
-	 * @param dni el dni
-	 * @param fullName nombre del/la enfermero/a
-	 * @param experience experiencia en años
-	 * @return el enfermero creado
-	 * @throws VaxException
-	 */
+	@Transactional
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException{
-		return null;
+		Nurse nurse = new Nurse(dni, fullName, experience);
+		try {
+			repository.save(nurse);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return nurse;
 	}
 
 	/**
@@ -127,12 +121,8 @@ public class VaxServiceImpl implements VaxService{
 		return null;
 	}
 
-	/**
-	 * @param name el nombre del centro a buscar
-	 * @return el centro
-	 * */
 	public Optional<Centre> getCentreByName(String name) throws VaxException{
-		return null;
+		return Optional.ofNullable(this.repository.findCentreByName(name));
 	}
 
 	/**
