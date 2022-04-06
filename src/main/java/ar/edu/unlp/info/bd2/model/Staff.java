@@ -23,7 +23,7 @@ public class Staff {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String dni;
 
     @ManyToMany(mappedBy = "staffs")
