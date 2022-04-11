@@ -94,15 +94,15 @@ public class VaxServiceImpl implements VaxService{
 		return nurse;
 	}
 
-	/**
-	* @param dni el dni
-	* @param fullName nombre completo
-	* @param area el area o areas de trabajo
-	* @return el personal de apoyo creado
-	* @throws VaxException
-	* */
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException{
-		return null;
+		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
+		try {
+			repository.save(supportStaff);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return supportStaff;
 	}
 
 	/**

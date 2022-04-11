@@ -13,8 +13,8 @@ public class SupportStaff extends Staff {
     public SupportStaff() {
     }
 
-    public SupportStaff(String fullName, String dni, String area) {
-        super(fullName, dni);
+    public SupportStaff(String dni, String fullName, String area) {
+        super(dni, fullName);
         this.area = area;
     }
 
