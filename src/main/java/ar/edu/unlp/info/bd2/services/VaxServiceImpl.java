@@ -27,6 +27,7 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Transactional
+	@Override
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
 		Patient patient = new Patient(email, password, fullname, dayOfBirth);
 		try {
@@ -39,6 +40,7 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Transactional
+	@Override
 	public Vaccine createVaccine(String name) throws VaxException{
 		Vaccine vaccine = new Vaccine(name);
 		try {
@@ -51,6 +53,7 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Transactional
+	@Override
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
 		Shot shot = new Shot(patient, vaccine, date, centre, nurse);
 		try {
@@ -62,15 +65,18 @@ public class VaxServiceImpl implements VaxService{
 		return shot;
 	}
 
+	@Override
 	public Optional<Patient> getPatientByEmail(String email){
 		return Optional.ofNullable(this.repository.findPatientByEmail(email));
 	}
 
+	@Override
 	public Optional<Vaccine> getVaccineByName(String name){
 		return Optional.ofNullable(this.repository.findVaccineByName(name));
 	}
 
 	@Transactional
+	@Override
 	public Centre createCentre(String name) throws VaxException{
 		Centre centre = new Centre(name);
 		try {
@@ -83,6 +89,7 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Transactional
+	@Override
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException{
 		Nurse nurse = new Nurse(dni, fullName, experience);
 		try {
@@ -94,6 +101,7 @@ public class VaxServiceImpl implements VaxService{
 		return nurse;
 	}
 
+	@Override
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException{
 		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
 		try {
@@ -105,48 +113,32 @@ public class VaxServiceImpl implements VaxService{
 		return supportStaff;
 	}
 
-	/**
-	 * @return el esquema nueva vacío
-	 * @throws VaxException
-	 * */
+	@Override
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException{
 		return null;
 	}
 
-	/**
-	 * @param id el id del esquema
-	 * @return el esquema de vacunación
-	 * */
+	@Override
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException{
 		return null;
 	}
 
+	@Override
 	public Optional<Centre> getCentreByName(String name) throws VaxException{
 		return Optional.ofNullable(this.repository.findCentreByName(name));
 	}
 
-	/**
-	 * @param staff el staff a actualizar
-	 * @return el staff
-	 * @throws VaxException
-	 */
+	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
 		return null;
 	}
 
-	/**
-	 * @param centre el centre a actualizar
-	 * @return el centre
-	 * @throws VaxException
-	 */
+	@Override
 	public Centre updateCentre(Centre centre){
 		return null;
 	}
 
-	/**
-	 * @param dni el dni del SupportStaff a buscar
-	 * @return el SupportStaff
-	 * */
+	@Override
 	public Optional<SupportStaff> getSupportStaffByDni(String dni){
 		return null;
 	}
