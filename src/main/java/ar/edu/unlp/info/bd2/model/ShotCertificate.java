@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
@@ -23,6 +26,7 @@ public class ShotCertificate {
     private UUID serialNumber;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     public ShotCertificate() {

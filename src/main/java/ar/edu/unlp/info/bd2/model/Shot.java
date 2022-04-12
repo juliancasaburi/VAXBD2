@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
@@ -19,6 +21,7 @@ public class Shot {
     private Long id;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @ManyToOne
