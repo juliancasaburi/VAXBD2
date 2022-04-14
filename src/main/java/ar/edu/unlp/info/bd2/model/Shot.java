@@ -32,7 +32,7 @@ public class Shot {
 
     @ManyToOne
     private Centre centre;
-
+//    aca
     @ManyToOne
     private Nurse nurse;
 

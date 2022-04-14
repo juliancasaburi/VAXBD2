@@ -115,12 +115,19 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException{
-		return null;
+		VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
+		try {
+			repository.save(vaccinationSchedule);
+		}
+		catch (ConstraintViolationException e){
+			throw new VaxException("Constraint Violation");
+		}
+		return vaccinationSchedule;
 	}
 
 	@Override
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException{
-		return null;
+		return this.repository.findVaccinationScheduleById(id);
 	}
 
 	@Override
@@ -134,12 +141,13 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Override
-	public Centre updateCentre(Centre centre){
-		return null;
+	public Centre updateCentre(Centre centre) {
+		repository.save(centre);
+		return centre;
 	}
 
 	@Override
 	public Optional<SupportStaff> getSupportStaffByDni(String dni){
-		return null;
+		return Optional.ofNullable(this.repository.findSupportStaffByDni(dni));
 	}
 }
