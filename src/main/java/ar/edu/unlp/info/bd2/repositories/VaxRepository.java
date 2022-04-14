@@ -27,6 +27,7 @@ public class VaxRepository{
             throw e;
         }
     }
+
     public Session getSession(){
         return this.sessionFactory.getCurrentSession();
     }
