@@ -14,8 +14,10 @@ import java.util.Optional;
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @Transactional(readOnly = true)
 public class VaxServiceImpl implements VaxService{
 
