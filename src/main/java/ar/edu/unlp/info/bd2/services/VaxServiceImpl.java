@@ -16,7 +16,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Transactional(readOnly = true)
 public class VaxServiceImpl implements VaxService{
 
 	@Autowired
@@ -65,11 +65,13 @@ public class VaxServiceImpl implements VaxService{
 		return shot;
 	}
 
+	@Transactional
 	@Override
 	public Optional<Patient> getPatientByEmail(String email){
 		return Optional.ofNullable(this.repository.findPatientByEmail(email));
 	}
 
+	@Transactional
 	@Override
 	public Optional<Vaccine> getVaccineByName(String name){
 		return Optional.ofNullable(this.repository.findVaccineByName(name));
@@ -101,6 +103,7 @@ public class VaxServiceImpl implements VaxService{
 		return nurse;
 	}
 
+	@Transactional
 	@Override
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException{
 		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
@@ -113,6 +116,7 @@ public class VaxServiceImpl implements VaxService{
 		return supportStaff;
 	}
 
+	@Transactional
 	@Override
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException{
 		VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
@@ -125,27 +129,32 @@ public class VaxServiceImpl implements VaxService{
 		return vaccinationSchedule;
 	}
 
+	@Transactional
 	@Override
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException{
 		return this.repository.findVaccinationScheduleById(id);
 	}
 
+	@Transactional
 	@Override
 	public Optional<Centre> getCentreByName(String name) throws VaxException{
 		return Optional.ofNullable(this.repository.findCentreByName(name));
 	}
 
+	@Transactional
 	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public Centre updateCentre(Centre centre) {
 		repository.save(centre);
 		return centre;
 	}
 
+	@Transactional
 	@Override
 	public Optional<SupportStaff> getSupportStaffByDni(String dni){
 		return Optional.ofNullable(this.repository.findSupportStaffByDni(dni));
