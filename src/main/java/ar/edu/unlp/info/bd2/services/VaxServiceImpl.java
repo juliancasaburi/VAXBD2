@@ -208,4 +208,11 @@ public class VaxServiceImpl implements VaxService{
 	public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate){
 		return null;
 	}
+
+	@Transactional
+	@Override
+	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+		repository.save(vaccinationSchedule);
+		return vaccinationSchedule;
+	}
 }
