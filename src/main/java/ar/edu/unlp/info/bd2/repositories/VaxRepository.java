@@ -2,11 +2,7 @@ package ar.edu.unlp.info.bd2.repositories;
 
 import javax.persistence.Query;
 
-import ar.edu.unlp.info.bd2.model.Centre;
-import ar.edu.unlp.info.bd2.model.Patient;
-import ar.edu.unlp.info.bd2.model.Vaccine;
-import ar.edu.unlp.info.bd2.model.SupportStaff;
-import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
+import ar.edu.unlp.info.bd2.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +27,8 @@ public class VaxRepository{
     public Session getSession(){
         return this.sessionFactory.getCurrentSession();
     }
+
+    /* TP1 Methods */
 
     public Patient findPatientByEmail(String email) {
         try {
@@ -97,9 +95,17 @@ public class VaxRepository{
         }
     }
 
+    /* TP2 Methods */
+
     public List<Patient> findAllPatients() {
         Query query = getSession().createQuery("from Patient");
         List<Patient> patients = query.getResultList();
         return patients;
+    }
+
+    public List<Nurse> findNurseWithMoreThanNYearsExperience() {
+        Query query = getSession().createQuery("from Nurse where experience > 9");
+        List<Nurse> nurses = query.getResultList();
+        return nurses;
     }
 }
