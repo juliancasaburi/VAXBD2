@@ -3,12 +3,15 @@ import ar.edu.unlp.info.bd2.model.Centre;
 import ar.edu.unlp.info.bd2.model.Nurse;
 import ar.edu.unlp.info.bd2.model.Patient;
 import ar.edu.unlp.info.bd2.model.Shot;
+import ar.edu.unlp.info.bd2.model.ShotCertificate;
+import ar.edu.unlp.info.bd2.model.Staff;
 import ar.edu.unlp.info.bd2.model.SupportStaff;
 import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
@@ -27,6 +30,8 @@ public class VaxServiceImpl implements VaxService{
 	public VaxServiceImpl(VaxRepository repository) {
 		this.repository = repository;
 	}
+
+	/* TP1 Methods */
 
 	@Transactional
 	@Override
@@ -155,5 +160,52 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Optional<SupportStaff> getSupportStaffByDni(String dni){
 		return Optional.ofNullable(this.repository.findSupportStaffByDni(dni));
+	}
+
+	/* TP2 Methods */
+
+	@Override
+	public List<Patient> getAllPatients(){
+		return this.repository.findAllPatients();
+	}
+
+	@Override
+	public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
+		return null;
+	}
+
+	@Override
+	public List<Centre> getCentresTopNStaff(int n){
+		return null;
+	}
+
+	@Override
+	public Centre getTopShotCentre(){
+		return null;
+	}
+
+	@Override
+	public List<Nurse> getNurseNotShot(){
+		return null;
+	}
+
+	@Override
+	public String getLessEmployeesSupportStaffArea(){
+		return null;
+	}
+
+	@Override
+	public List<Staff> getStaffWithName(String name){
+		return null;
+	}
+
+	@Override
+	public List<Vaccine> getUnappliedVaccines(){
+		return null;
+	}
+
+	@Override
+	public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate){
+		return null;
 	}
 }

@@ -96,4 +96,10 @@ public class VaxRepository{
             throw e;
         }
     }
+
+    public List<Patient> findAllPatients() {
+        Query query = getSession().createQuery("from Patient");
+        List<Patient> patients = query.getResultList();
+        return patients;
+    }
 }
