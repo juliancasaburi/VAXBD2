@@ -108,4 +108,10 @@ public class VaxRepository{
         List<Nurse> nurses = query.getResultList();
         return nurses;
     }
+
+    public Centre getTopShotCentre() {
+        Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(*) desc");
+        query.setMaxResults(1);
+        return (Centre) query.getSingleResult();
+    }
 }
