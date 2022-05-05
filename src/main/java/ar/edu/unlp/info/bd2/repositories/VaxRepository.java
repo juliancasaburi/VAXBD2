@@ -114,4 +114,10 @@ public class VaxRepository{
         query.setMaxResults(1);
         return (Centre) query.getSingleResult();
     }
+
+    public List<Nurse> getNurseNotShot() {
+        Query query = getSession().createQuery("from Nurse n where n.id NOT IN (select s.nurse.id from Shot s)");
+        List<Nurse> nurses = query.getResultList();
+        return nurses;
+    }
 }

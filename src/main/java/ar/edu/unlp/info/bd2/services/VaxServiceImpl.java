@@ -186,7 +186,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public List<Nurse> getNurseNotShot(){
-		return null;
+		return this.repository.getNurseNotShot();
 	}
 
 	@Override
