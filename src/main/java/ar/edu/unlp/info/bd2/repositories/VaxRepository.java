@@ -38,7 +38,7 @@ public class VaxRepository{
             return !patients.isEmpty() ? patients.get(query.getFirstResult()) : null;
         }
         catch (Exception e){
-            this.sessionFactory.getCurrentSession().clear();
+            getSession().clear();
             throw e;
         }
     }
@@ -51,7 +51,7 @@ public class VaxRepository{
             return !vaccines.isEmpty() ? vaccines.get(query.getFirstResult()) : null;
         }
         catch (Exception e){
-            this.sessionFactory.getCurrentSession().clear();
+            getSession().clear();
             throw e;
         }
     }
@@ -64,7 +64,7 @@ public class VaxRepository{
             return !centres.isEmpty() ? centres.get(query.getFirstResult()) : null;
         }
         catch (Exception e){
-            this.sessionFactory.getCurrentSession().clear();
+            getSession().clear();
             throw e;
         }
     }
@@ -77,7 +77,7 @@ public class VaxRepository{
             return !supportStaffList.isEmpty() ? supportStaffList.get(query.getFirstResult()) : null;
         }
         catch (Exception e){
-            this.sessionFactory.getCurrentSession().clear();
+            getSession().clear();
             throw e;
         }
     }
@@ -90,7 +90,7 @@ public class VaxRepository{
             return !vaccinationSchedule.isEmpty() ? vaccinationSchedule.get(query.getFirstResult()) : null;
         }
         catch (Exception e){
-            this.sessionFactory.getCurrentSession().clear();
+            getSession().clear();
             throw e;
         }
     }
