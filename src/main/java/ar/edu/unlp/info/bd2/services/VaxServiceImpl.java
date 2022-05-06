@@ -215,4 +215,12 @@ public class VaxServiceImpl implements VaxService{
 		repository.save(vaccinationSchedule);
 		return vaccinationSchedule;
 	}
+
+	//getVaccineNotShot()
+	//Obtiene una lista de las vacunas de las que no se aplicaron dosis
+
+	@Override
+	public List <Vaccine> getVaccineNotShot() {
+		return this.repository.getVaccineNotShot();
+	}
 }
