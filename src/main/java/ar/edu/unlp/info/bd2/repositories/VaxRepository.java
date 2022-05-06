@@ -6,6 +6,8 @@ import ar.edu.unlp.info.bd2.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -103,8 +105,9 @@ public class VaxRepository{
         return patients;
     }
 
-    public List<Nurse> findNurseWithMoreThanNYearsExperience() {
-        Query query = getSession().createQuery("from Nurse where experience > 9");
+    public List<Nurse> findNurseWithMoreThanNYearsExperience(int years) {
+        Query query = getSession().createQuery("from Nurse where experience > :years");
+        query.setParameter("years", years);
         List<Nurse> nurses = query.getResultList();
         return nurses;
     }
@@ -126,5 +129,26 @@ public class VaxRepository{
         Query query = getSession().createQuery("from Nurse n where n.id NOT IN (select s.nurse.id from Shot s)");
         List<Nurse> nurses = query.getResultList();
         return nurses;
+    }
+
+    //    public SupportStaff getLessEmployeesSupportStaffArea(){
+//        Query query = getSession().createQuery("");
+//        query.setMaxResults(1);
+//        return (SupportStaff) query.getSingleResult();
+//    }
+
+    public List<Staff> getStaffWithName(String name){
+        Query query = getSession().createQuery("from Staff where fullName LIKE '%' + :name + '%'");
+        query.setParameter("name", name);
+        List<Staff> staffs = query.getResultList();
+        return staffs;
+    }
+
+    public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate){
+        Query query = getSession().createQuery("from ShotCertificate sc where sc.date BETWEEN :startDate and :endDate");
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        List<ShotCertificate> shotCertificates = query.getResultList();
+        return shotCertificates;
     }
 }

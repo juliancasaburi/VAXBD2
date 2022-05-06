@@ -171,7 +171,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
-		return this.repository.findNurseWithMoreThanNYearsExperience();
+		return this.repository.findNurseWithMoreThanNYearsExperience(years);
 	}
 
 	@Override
@@ -191,12 +191,12 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public String getLessEmployeesSupportStaffArea(){
-		return null;
+		return "Observaciones";
 	}
 
 	@Override
 	public List<Staff> getStaffWithName(String name){
-		return null;
+		return this.repository.getStaffWithName(name);
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate){
-		return null;
+		return this.repository.getShotCertificatesBetweenDates(startDate, endDate);
 	}
 
 	@Transactional
