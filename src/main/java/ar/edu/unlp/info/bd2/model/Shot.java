@@ -49,7 +49,7 @@ public class Shot {
         this.centre = centre;
         this.nurse = nurse;
         patient.addShot(this);
-        setShotCertificate(new ShotCertificate(new Date()));
+        setShotCertificate(new ShotCertificate(date));
     }
 
     public Long getId() {
