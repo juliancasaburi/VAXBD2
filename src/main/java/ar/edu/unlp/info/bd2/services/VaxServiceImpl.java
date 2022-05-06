@@ -176,7 +176,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public List<Centre> getCentresTopNStaff(int n){
-		return null;
+		return this.repository.getCentresTopNStaff(n);
 	}
 
 	@Override

@@ -109,6 +109,13 @@ public class VaxRepository{
         return nurses;
     }
 
+    public List<Centre> getCentresTopNStaff(int maxCentreQuantity) {
+        Query query = getSession().createQuery("from Centre c order by size(c.staffs) desc");
+        query.setMaxResults(maxCentreQuantity);
+        List<Centre> centres = query.getResultList();
+        return centres;
+    }
+
     public Centre getTopShotCentre() {
         Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(*) desc");
         query.setMaxResults(1);
