@@ -125,12 +125,6 @@ public class VaxRepository {
         return nurses;
     }
 
-    //    public SupportStaff getLessEmployeesSupportStaffArea(){
-//        Query query = getSession().createQuery("");
-//        query.setMaxResults(1);
-//        return (SupportStaff) query.getSingleResult();
-//    }
-
     public List<Staff> getStaffWithName(String name) {
         Query query = getSession().createQuery("from Staff where fullName LIKE CONCAT ('%', :name, '%')");
         query.setParameter("name", name);

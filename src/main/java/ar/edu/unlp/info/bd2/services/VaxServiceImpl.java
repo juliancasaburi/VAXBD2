@@ -191,7 +191,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public String getLessEmployeesSupportStaffArea(){
-		return "Observaciones";
+		return this.repository.getLessEmployeesSupportStaffArea();
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class VaxServiceImpl implements VaxService{
 
 	@Override
 	public List<Vaccine> getUnappliedVaccines(){
-		return null;
+		return this.repository.getVaccineNotShot();
 	}
 
 	@Override
@@ -216,11 +216,4 @@ public class VaxServiceImpl implements VaxService{
 		return vaccinationSchedule;
 	}
 
-	//getVaccineNotShot()
-	//Obtiene una lista de las vacunas de las que no se aplicaron dosis
-
-	@Override
-	public List <Vaccine> getVaccineNotShot() {
-		return this.repository.getVaccineNotShot();
-	}
 }
