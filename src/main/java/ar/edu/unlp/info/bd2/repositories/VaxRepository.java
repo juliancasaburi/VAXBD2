@@ -140,8 +140,6 @@ public class VaxRepository {
         return shotCertificates;
     }
 
-
-    //("from Nurse n where n.id NOT IN (select s.nurse.id from Shot s)");
     public List<Vaccine> getVaccineNotShot(){
         Query query = getSession().createQuery("from Vaccine v where v.id NOT IN (select s.vaccine.id from Shot s)");
         List<Vaccine> vaccine = query.getResultList();
