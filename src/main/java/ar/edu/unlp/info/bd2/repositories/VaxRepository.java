@@ -147,4 +147,10 @@ public class VaxRepository {
         List<Vaccine> vaccine = query.getResultList();
         return vaccine;
     }
+
+    public String getLessEmployeesSupportStaffArea(){
+        Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(*) asc");
+        query.setMaxResults(1);
+        return (String) query.getSingleResult();
+    }
 }
