@@ -15,7 +15,7 @@ import java.util.HashSet;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @Table(name = "Staff")
-public class Staff {
+public abstract class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
