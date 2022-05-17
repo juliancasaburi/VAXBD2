@@ -217,9 +217,14 @@ public class VaxServiceImpl implements VaxService{
 
 	@Transactional
 	@Override
-	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
-		repository.save(vaccinationSchedule);
-		return vaccinationSchedule;
+	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
+		try {
+			repository.save(vaccinationSchedule);
+			return vaccinationSchedule;
+		}
+		catch (Exception e){
+			throw new VaxException(e.getMessage());
+		}
 	}
 
 }
