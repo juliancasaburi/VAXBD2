@@ -142,8 +142,13 @@ public class VaxServiceImpl implements VaxService{
 	@Transactional
 	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
-		repository.save(staff);
-		return staff;
+		try {
+			repository.save(staff);
+			return staff;
+		}
+		catch (Exception e){
+			throw new VaxException(e.getMessage());
+		}
 	}
 
 	@Transactional
