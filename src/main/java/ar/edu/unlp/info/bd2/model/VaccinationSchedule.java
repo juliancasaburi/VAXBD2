@@ -3,12 +3,7 @@ package ar.edu.unlp.info.bd2.model;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,6 +15,11 @@ public class VaccinationSchedule {
     private Long id;
 
     @ManyToMany
+    @JoinTable(
+            // default table name
+            // default joinColumn name
+            inverseJoinColumns = @JoinColumn(name = "vaccine_id")
+    )
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<Vaccine> vaccines = new ArrayList<>();
 

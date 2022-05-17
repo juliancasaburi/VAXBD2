@@ -1,12 +1,7 @@
 package ar.edu.unlp.info.bd2.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -24,6 +19,11 @@ public class Centre {
     private String name;
 
     @ManyToMany
+    @JoinTable(
+            // default table name
+            joinColumns = @JoinColumn(name = "centre_id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id")
+    )
     @Cascade(CascadeType.SAVE_UPDATE)
     private Set<Staff> staffs = new HashSet<>();
 
