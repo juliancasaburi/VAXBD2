@@ -1448,5 +1448,19 @@ public class DBInitializer {
         Patient patient322 = service.createPatient("hanancarrasco742@fruit.net", "Hanan Carrasco", "idooac2801", sdf.parse("7/5/1994"));
         this.service.createShot(patient322,vaccine002,sdf.parse("24/4/2020"),centre009,nurse022);
         this.service.createShot(patient322,vaccine002,sdf.parse("4/7/2020"),centre009,nurse022);
+
+        this.service.updateCentre(centre001);
+        this.service.updateCentre(centre002);
+        this.service.updateCentre(centre003);
+        this.service.updateCentre(centre004);
+        this.service.updateCentre(centre005);
+        this.service.updateCentre(centre006);
+        this.service.updateCentre(centre007);
+        this.service.updateCentre(centre008);
+        this.service.updateCentre(centre009);
+        this.service.updateCentre(centre010);
+        this.service.updateCentre(centre011);
+        this.service.updateCentre(centre012);
+        this.service.updateCentre(centre013);
     }
 }
