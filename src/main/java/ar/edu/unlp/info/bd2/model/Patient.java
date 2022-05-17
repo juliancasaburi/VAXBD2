@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
@@ -28,6 +30,7 @@ public class Patient {
     private String fullname;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 
     @OneToMany(mappedBy = "patient")
@@ -77,6 +80,10 @@ public class Patient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void addShot(Shot shot){
+        shots.add(shot);
     }
 
     public Set<Shot> getShots() {

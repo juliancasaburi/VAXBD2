@@ -15,7 +15,7 @@ import java.util.HashSet;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @Table(name = "Staff")
-public class Staff {
+public abstract class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
@@ -23,7 +23,7 @@ public class Staff {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String dni;
 
     @ManyToMany(mappedBy = "staffs")
@@ -63,5 +63,9 @@ public class Staff {
 
     public void setCentres(Set<Centre> centres) {
         this.centres = centres;
+    }
+
+    public void addCentre(Centre centre){
+        this.centres.add(centre);
     }
 }

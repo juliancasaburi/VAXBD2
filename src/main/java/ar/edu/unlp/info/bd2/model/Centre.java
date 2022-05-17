@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import java.util.Set;
 import java.util.HashSet;
 
@@ -21,6 +24,7 @@ public class Centre {
     private String name;
 
     @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Set<Staff> staffs = new HashSet<>();
 
     public Centre() {
@@ -51,6 +55,7 @@ public class Centre {
     }
 
     public void addStaff(Staff staff) {
-        this.staffs.add(staff);
+        staffs.add(staff);
+        staff.addCentre(this);
     }
 }

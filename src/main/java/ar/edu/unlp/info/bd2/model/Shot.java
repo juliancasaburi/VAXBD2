@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
@@ -18,6 +21,7 @@ public class Shot {
     private Long id;
 
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @ManyToOne
@@ -32,18 +36,20 @@ public class Shot {
     @ManyToOne
     private Nurse nurse;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ShotCertificate shotCertificate;
 
     public Shot() {
     }
 
-    public Shot(Date date, Patient patient, Vaccine vaccine, Centre centre, Nurse nurse) {
-        this.date = date;
+    public Shot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) {
         this.patient = patient;
         this.vaccine = vaccine;
+        this.date = date;
         this.centre = centre;
         this.nurse = nurse;
+        patient.addShot(this);
+        setShotCertificate(new ShotCertificate(date));
     }
 
     public Long getId() {

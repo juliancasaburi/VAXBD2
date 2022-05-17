@@ -3,20 +3,25 @@ import ar.edu.unlp.info.bd2.model.Centre;
 import ar.edu.unlp.info.bd2.model.Nurse;
 import ar.edu.unlp.info.bd2.model.Patient;
 import ar.edu.unlp.info.bd2.model.Shot;
+import ar.edu.unlp.info.bd2.model.ShotCertificate;
+import ar.edu.unlp.info.bd2.model.Staff;
 import ar.edu.unlp.info.bd2.model.SupportStaff;
 import ar.edu.unlp.info.bd2.model.VaccinationSchedule;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import ar.edu.unlp.info.bd2.repositories.VaxException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Service
+@Transactional(readOnly = true)
 public class VaxServiceImpl implements VaxService{
 
 	@Autowired
@@ -26,7 +31,10 @@ public class VaxServiceImpl implements VaxService{
 		this.repository = repository;
 	}
 
+	/* TP1 Methods */
+
 	@Transactional
+	@Override
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
 		Patient patient = new Patient(email, password, fullname, dayOfBirth);
 		try {
@@ -38,129 +46,174 @@ public class VaxServiceImpl implements VaxService{
 		return patient;
 	}
 
-	/**
-	 *
-	 * @param name nombre de la vacuna
-	 * @return la vacuna creada
-	 * @throws VaxException
-	 */
+	@Transactional
+	@Override
 	public Vaccine createVaccine(String name) throws VaxException{
-		return null;
+		Vaccine vaccine = new Vaccine(name);
+		try {
+			repository.save(vaccine);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return vaccine;
 	}
 
-	/**
-	 *
-	 * @param patient paciente vacunado
-	 * @param vaccine vacuna aplicada
-	 * @param date fecha de aplicación
-	 * @param centre el centro de vacunación donde se aplicó
-	 * @param nurse enfermero/a que aplico la vacuna
-	 * @return el usuario creado
-	 * @throws VaxException
-	 */
+	@Transactional
+	@Override
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
-		return null;
+		Shot shot = new Shot(patient, vaccine, date, centre, nurse);
+		try {
+			repository.save(shot);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return shot;
 	}
 
-
-	/**
-	 *
-	 * @param email email del usuario
-	 * @return
-	 */
+	@Override
 	public Optional<Patient> getPatientByEmail(String email){
 		return Optional.ofNullable(this.repository.findPatientByEmail(email));
 	}
 
-
-	/**
-	 *
-	 * @param name nombre de la vacuna
-	 * @return
-	 */
+	@Override
 	public Optional<Vaccine> getVaccineByName(String name){
-		return null;
+		return Optional.ofNullable(this.repository.findVaccineByName(name));
 	}
 
-	/**
-	 *
-	 * @param name nombre del centro de vacunación
-	 * @return el centro de vacunación nuevo
-	 * @throws VaxException
-	 */
+	@Transactional
+	@Override
 	public Centre createCentre(String name) throws VaxException{
-		return null;
+		Centre centre = new Centre(name);
+		try {
+			repository.save(centre);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return centre;
 	}
 
-	/**
-	 * @param dni el dni
-	 * @param fullName nombre del/la enfermero/a
-	 * @param experience experiencia en años
-	 * @return el enfermero creado
-	 * @throws VaxException
-	 */
+	@Transactional
+	@Override
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException{
-		return null;
+		Nurse nurse = new Nurse(dni, fullName, experience);
+		try {
+			repository.save(nurse);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return nurse;
 	}
 
-	/**
-	* @param dni el dni
-	* @param fullName nombre completo
-	* @param area el area o areas de trabajo
-	* @return el personal de apoyo creado
-	* @throws VaxException
-	* */
+	@Transactional
+	@Override
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException{
-		return null;
+		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
+		try {
+			repository.save(supportStaff);
+		}
+		catch(ConstraintViolationException e) {
+			throw new VaxException("Constraint Violation");
+		}
+		return supportStaff;
 	}
 
-	/**
-	 * @return el esquema nueva vacío
-	 * @throws VaxException
-	 * */
+	@Transactional
+	@Override
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException{
-		return null;
+		VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
+		try {
+			repository.save(vaccinationSchedule);
+		}
+		catch (ConstraintViolationException e){
+			throw new VaxException("Constraint Violation");
+		}
+		return vaccinationSchedule;
 	}
 
-	/**
-	 * @param id el id del esquema
-	 * @return el esquema de vacunación
-	 * */
+	@Override
 	public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException{
-		return null;
+		return this.repository.findVaccinationScheduleById(id);
 	}
 
-	/**
-	 * @param name el nombre del centro a buscar
-	 * @return el centro
-	 * */
+	@Override
 	public Optional<Centre> getCentreByName(String name) throws VaxException{
-		return null;
+		return Optional.ofNullable(this.repository.findCentreByName(name));
 	}
 
-	/**
-	 * @param staff el staff a actualizar
-	 * @return el staff
-	 * @throws VaxException
-	 */
+	@Transactional
+	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
 		return null;
 	}
 
-	/**
-	 * @param centre el centre a actualizar
-	 * @return el centre
-	 * @throws VaxException
-	 */
-	public Centre updateCentre(Centre centre){
-		return null;
+	@Transactional
+	@Override
+	public Centre updateCentre(Centre centre) {
+		repository.save(centre);
+		return centre;
 	}
 
-	/**
-	 * @param dni el dni del SupportStaff a buscar
-	 * @return el SupportStaff
-	 * */
+	@Override
 	public Optional<SupportStaff> getSupportStaffByDni(String dni){
-		return null;
+		return Optional.ofNullable(this.repository.findSupportStaffByDni(dni));
 	}
+
+	/* TP2 Methods */
+
+	@Override
+	public List<Patient> getAllPatients(){
+		return this.repository.findAllPatients();
+	}
+
+	@Override
+	public List<Nurse> getNurseWithMoreThanNYearsExperience(int years){
+		return this.repository.findNurseWithMoreThanNYearsExperience(years);
+	}
+
+	@Override
+	public List<Centre> getCentresTopNStaff(int n){
+		return this.repository.getCentresTopNStaff(n);
+	}
+
+	@Override
+	public Centre getTopShotCentre(){
+		return this.repository.getTopShotCentre();
+	}
+
+	@Override
+	public List<Nurse> getNurseNotShot(){
+		return this.repository.getNurseNotShot();
+	}
+
+	@Override
+	public String getLessEmployeesSupportStaffArea(){
+		return this.repository.getLessEmployeesSupportStaffArea();
+	}
+
+	@Override
+	public List<Staff> getStaffWithName(String name){
+		return this.repository.getStaffWithName(name);
+	}
+
+	@Override
+	public List<Vaccine> getUnappliedVaccines(){
+		return this.repository.getVaccineNotShot();
+	}
+
+	@Override
+	public List <ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate){
+		return this.repository.getShotCertificatesBetweenDates(startDate, endDate);
+	}
+
+	@Transactional
+	@Override
+	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) {
+		repository.save(vaccinationSchedule);
+		return vaccinationSchedule;
+	}
+
 }

@@ -1,5 +1,8 @@
 package ar.edu.unlp.info.bd2.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +20,7 @@ public class VaccinationSchedule {
     private Long id;
 
     @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
