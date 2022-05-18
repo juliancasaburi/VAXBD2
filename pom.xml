@@ -140,6 +140,9 @@
                         <version>1.1.0</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
             </plugin>
 
         </plugins>
