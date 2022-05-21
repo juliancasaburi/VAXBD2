@@ -126,8 +126,8 @@ public class VaxRepository {
     }
 
     public List<Staff> getStaffWithName(String name) {
-        Query query = getSession().createQuery("from Staff where fullName LIKE CONCAT ('%', :name, '%')");
-        query.setParameter("name", name);
+        Query query = getSession().createQuery("from Staff where fullName LIKE :name");
+        query.setParameter("name", "%" + name + "%");
         List<Staff> staffs = query.getResultList();
         return staffs;
     }
