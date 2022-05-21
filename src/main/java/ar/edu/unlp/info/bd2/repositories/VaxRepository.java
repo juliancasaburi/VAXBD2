@@ -120,20 +120,20 @@ public class VaxRepository {
     }
 
     public List<Nurse> getNurseNotShot() {
-        Query query = getSession().createQuery("from Nurse n where n.id NOT IN (select s.nurse.id from Shot s)");
+        Query query = getSession().createQuery("from Nurse n where n.id not in (select s.nurse.id from Shot s)");
         List<Nurse> nurses = query.getResultList();
         return nurses;
     }
 
     public List<Staff> getStaffWithName(String name) {
-        Query query = getSession().createQuery("from Staff where fullName LIKE :name");
+        Query query = getSession().createQuery("from Staff where fullName like :name");
         query.setParameter("name", "%" + name + "%");
         List<Staff> staffs = query.getResultList();
         return staffs;
     }
 
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        Query query = getSession().createQuery("from ShotCertificate sc where sc.date BETWEEN :startDate and :endDate");
+        Query query = getSession().createQuery("from ShotCertificate sc where sc.date between :startDate and :endDate");
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
         List<ShotCertificate> shotCertificates = query.getResultList();
@@ -141,7 +141,7 @@ public class VaxRepository {
     }
 
     public List<Vaccine> getVaccineNotShot(){
-        Query query = getSession().createQuery("from Vaccine v where v.id NOT IN (select s.vaccine.id from Shot s)");
+        Query query = getSession().createQuery("from Vaccine v where v.id not in (select s.vaccine.id from Shot s)");
         List<Vaccine> vaccine = query.getResultList();
         return vaccine;
     }
