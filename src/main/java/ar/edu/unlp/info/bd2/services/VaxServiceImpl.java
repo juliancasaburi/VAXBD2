@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import ar.edu.unlp.info.bd2.repositories.VaxRepository;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,12 +36,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Patient createPatient(String email, String fullname, String password, Date dayOfBirth) throws VaxException {
 		Patient patient = new Patient(email, password, fullname, dayOfBirth);
-		try {
-			repository.save(patient);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(patient);
 		return patient;
 	}
 
@@ -50,12 +44,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Vaccine createVaccine(String name) throws VaxException{
 		Vaccine vaccine = new Vaccine(name);
-		try {
-			repository.save(vaccine);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(vaccine);
 		return vaccine;
 	}
 
@@ -63,12 +52,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException{
 		Shot shot = new Shot(patient, vaccine, date, centre, nurse);
-		try {
-			repository.save(shot);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(shot);
 		return shot;
 	}
 
@@ -86,12 +70,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Centre createCentre(String name) throws VaxException{
 		Centre centre = new Centre(name);
-		try {
-			repository.save(centre);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(centre);
 		return centre;
 	}
 
@@ -99,12 +78,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException{
 		Nurse nurse = new Nurse(dni, fullName, experience);
-		try {
-			repository.save(nurse);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(nurse);
 		return nurse;
 	}
 
@@ -112,12 +86,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException{
 		SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
-		try {
-			repository.save(supportStaff);
-		}
-		catch(ConstraintViolationException e) {
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(supportStaff);
 		return supportStaff;
 	}
 
@@ -125,12 +94,7 @@ public class VaxServiceImpl implements VaxService{
 	@Override
 	public VaccinationSchedule createVaccinationSchedule() throws VaxException{
 		VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
-		try {
-			repository.save(vaccinationSchedule);
-		}
-		catch (ConstraintViolationException e){
-			throw new VaxException("Constraint Violation");
-		}
+		repository.save(vaccinationSchedule);
 		return vaccinationSchedule;
 	}
 
@@ -140,25 +104,20 @@ public class VaxServiceImpl implements VaxService{
 	}
 
 	@Override
-	public Optional<Centre> getCentreByName(String name) throws VaxException{
+	public Optional<Centre> getCentreByName(String name){
 		return Optional.ofNullable(this.repository.findCentreByName(name));
 	}
 
 	@Transactional
 	@Override
 	public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException{
-		try {
-			repository.save(staff);
-			return staff;
-		}
-		catch (Exception e){
-			throw new VaxException(e.getMessage());
-		}
+		repository.save(staff);
+		return staff;
 	}
 
 	@Transactional
 	@Override
-	public Centre updateCentre(Centre centre) {
+	public Centre updateCentre(Centre centre) throws VaxException {
 		repository.save(centre);
 		return centre;
 	}
@@ -218,13 +177,8 @@ public class VaxServiceImpl implements VaxService{
 	@Transactional
 	@Override
 	public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
-		try {
-			repository.save(vaccinationSchedule);
-			return vaccinationSchedule;
-		}
-		catch (Exception e){
-			throw new VaxException(e.getMessage());
-		}
+		repository.save(vaccinationSchedule);
+		return vaccinationSchedule;
 	}
 
 }
