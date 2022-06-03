@@ -21,6 +21,7 @@ public class VaccinationSchedule {
             inverseJoinColumns = @JoinColumn(name = "vaccine_id")
     )
     @Cascade(CascadeType.SAVE_UPDATE)
+    @OrderColumn
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {
