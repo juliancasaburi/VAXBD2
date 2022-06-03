@@ -109,7 +109,7 @@ public class VaxRepository {
     }
 
     public Centre getTopShotCentre() {
-        Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(*) desc");
+        Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(s.centre) desc");
         query.setMaxResults(1);
         return (Centre) query.getSingleResult();
     }
@@ -142,7 +142,7 @@ public class VaxRepository {
     }
 
     public String getLessEmployeesSupportStaffArea(){
-        Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(*) asc");
+        Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(sf.area) asc");
         query.setMaxResults(1);
         return (String) query.getSingleResult();
     }
