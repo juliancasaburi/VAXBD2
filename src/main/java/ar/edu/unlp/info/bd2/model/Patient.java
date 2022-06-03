@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Entity
-@Table(name = "Patient")
+@Table(name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,10 @@ public class Patient {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullname;
 
-    @Column(nullable = false)
+    @Column(name ="day_of_birth", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 

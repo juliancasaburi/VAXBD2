@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ShotCertificate")
+@Table(name = "shot_certificate")
 public class ShotCertificate {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -22,7 +22,7 @@ public class ShotCertificate {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(updatable = false, nullable = false)
+    @Column(name = "serial_number", updatable = false, nullable = false)
     private UUID serialNumber;
 
     @Column(nullable = false)

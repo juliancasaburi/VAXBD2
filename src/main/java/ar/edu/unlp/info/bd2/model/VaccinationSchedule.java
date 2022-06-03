@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "VaccinationSchedule")
+@Table(name = "vaccination_schedule")
 public class VaccinationSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +17,11 @@ public class VaccinationSchedule {
     @ManyToMany
     @JoinTable(
             // default table name
-            // default joinColumn name
+            joinColumns = @JoinColumn(name = "vaccination_schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "vaccine_id")
     )
     @Cascade(CascadeType.SAVE_UPDATE)
-    @OrderColumn
+    @OrderColumn(name="vaccine_order")
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="SupportStaff")
+@Table(name="support_staff")
 public class SupportStaff extends Staff {
     @Column(nullable=false)
     private String area;
