@@ -2,6 +2,7 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Patient {
     @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
     private Set<Shot> shots = new HashSet<>();
 
     public Patient() {
