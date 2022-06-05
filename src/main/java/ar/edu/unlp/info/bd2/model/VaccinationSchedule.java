@@ -30,7 +30,7 @@ public class VaccinationSchedule {
             inverseJoinColumns = @JoinColumn(name = "vaccine_id")
     )
     @Cascade(CascadeType.SAVE_UPDATE)
-    @OrderColumn(name="vaccine_order")
+    @OrderColumn(name = "vaccine_order")
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {

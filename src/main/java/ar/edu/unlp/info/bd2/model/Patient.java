@@ -30,7 +30,7 @@ public class Patient {
     @Column(name = "full_name", nullable = false)
     private String fullname;
 
-    @Column(name ="day_of_birth", nullable = false)
+    @Column(name = "day_of_birth", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 
@@ -83,7 +83,7 @@ public class Patient {
         this.email = email;
     }
 
-    public void addShot(Shot shot){
+    public void addShot(Shot shot) {
         shots.add(shot);
     }
 

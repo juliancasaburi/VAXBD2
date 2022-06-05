@@ -50,8 +50,7 @@ public class ShotCertificate {
         return serialNumber;
     }
 
-    public void setSerialNumber(UUID serialNumber)
-    {
+    public void setSerialNumber(UUID serialNumber) {
         this.serialNumber = serialNumber;
     }
 

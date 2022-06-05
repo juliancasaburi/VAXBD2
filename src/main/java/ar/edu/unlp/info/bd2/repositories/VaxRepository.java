@@ -28,11 +28,9 @@ public class VaxRepository {
     public void save(Object o) throws VaxException {
         try {
             getSession().saveOrUpdate(o);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new VaxException("Constraint Violation");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             getSession().clear();
             throw new VaxException(e.getMessage());
         }
@@ -79,8 +77,7 @@ public class VaxRepository {
                     .getSingleResult();
         } catch (NoResultException e) {
             throw new VaxException(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             getSession().clear();
             throw e;
         }
@@ -135,13 +132,13 @@ public class VaxRepository {
         return shotCertificates;
     }
 
-    public List<Vaccine> getVaccineNotShot(){
+    public List<Vaccine> getVaccineNotShot() {
         Query query = getSession().createQuery("from Vaccine v where v.id not in (select s.vaccine.id from Shot s)");
         List<Vaccine> vaccine = query.getResultList();
         return vaccine;
     }
 
-    public String getLessEmployeesSupportStaffArea(){
+    public String getLessEmployeesSupportStaffArea() {
         Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(sf.area) asc");
         query.setMaxResults(1);
         return (String) query.getSingleResult();

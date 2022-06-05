@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="nurse")
+@Table(name = "nurse")
 public class Nurse extends Staff {
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Integer experience;
 
     public Nurse() {

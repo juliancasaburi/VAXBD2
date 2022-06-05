@@ -66,7 +66,7 @@ public abstract class Staff {
         this.centres = centres;
     }
 
-    public void addCentre(Centre centre){
+    public void addCentre(Centre centre) {
         this.centres.add(centre);
     }
 }
