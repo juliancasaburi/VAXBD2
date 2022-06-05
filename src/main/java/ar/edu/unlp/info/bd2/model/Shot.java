@@ -43,7 +43,7 @@
                 cascade = CascadeType.ALL,
                 optional = false
         )
-        @JoinColumn(name = "shot_certificate_serial_number", nullable = false)
+        @JoinColumn(name = "shot_certificate_id", nullable = false)
         private ShotCertificate shotCertificate;
 
         public Shot() {
@@ -55,8 +55,8 @@
             this.date = date;
             this.centre = centre;
             this.nurse = nurse;
-            patient.addShot(this);
             setShotCertificate(new ShotCertificate(date));
+            patient.addShot(this);
         }
 
         public Long getId() {
