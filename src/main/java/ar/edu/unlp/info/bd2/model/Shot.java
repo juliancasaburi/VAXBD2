@@ -27,15 +27,19 @@ public class Shot {
     private Date date;
 
     @ManyToOne
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
+    @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine;
 
     @ManyToOne
+    @JoinColumn(name = "centre_id")
     private Centre centre;
 
     @ManyToOne
+    @JoinColumn(name = "nurse_id")
     private Nurse nurse;
 
     @OneToOne(
