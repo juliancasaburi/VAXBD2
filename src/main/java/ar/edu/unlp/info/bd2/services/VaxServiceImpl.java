@@ -59,12 +59,12 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public Optional<Patient> getPatientByEmail(String email) {
-        return Optional.ofNullable(this.repository.findPatientByEmail(email));
+        return this.repository.findPatientByEmail(email);
     }
 
     @Override
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.ofNullable(this.repository.findVaccineByName(name));
+        return this.repository.findVaccineByName(name);
     }
 
     @Transactional
@@ -106,7 +106,7 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public Optional<Centre> getCentreByName(String name) {
-        return Optional.ofNullable(this.repository.findCentreByName(name));
+        return this.repository.findCentreByName(name);
     }
 
     @Transactional
@@ -125,7 +125,7 @@ public class VaxServiceImpl implements VaxService {
 
     @Override
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.ofNullable(this.repository.findSupportStaffByDni(dni));
+        return this.repository.findSupportStaffByDni(dni);
     }
 
     /* TP2 Methods */
