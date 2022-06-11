@@ -1,2 +1,2 @@
 use vaccination;
-db.nurses.find( { experience: { $lt: 5} })
+db.nurses.find( { experience: { $lte: 5} })
