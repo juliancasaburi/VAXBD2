@@ -1,6 +1,8 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,9 +15,10 @@ import javax.persistence.Table;
 import java.util.Set;
 import java.util.HashSet;
 
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @Table(name = "staff")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "staff_type")
 public abstract class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
