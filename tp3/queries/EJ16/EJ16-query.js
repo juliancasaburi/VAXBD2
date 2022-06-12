@@ -16,5 +16,6 @@ db.doses.aggregate([
     },
     {
         $project: {"luPatient": 0}
-    }
+    },
+    { $out : "ej16Doses" }
 ]);
