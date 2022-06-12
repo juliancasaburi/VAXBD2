@@ -3,24 +3,34 @@ package ar.edu.unlp.info.bd2.model;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "VaccinationSchedule")
+@Table(name = "vaccination_schedule")
 public class VaccinationSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             // default table name
-            // default joinColumn name
+            joinColumns = @JoinColumn(name = "vaccination_schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "vaccine_id")
     )
     @Cascade(CascadeType.SAVE_UPDATE)
+    @OrderColumn(name = "vaccine_order")
     private List<Vaccine> vaccines = new ArrayList<>();
 
     public VaccinationSchedule() {

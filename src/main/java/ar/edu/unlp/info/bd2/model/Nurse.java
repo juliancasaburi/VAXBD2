@@ -1,13 +1,13 @@
 package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="Nurse")
+@DiscriminatorValue("Nurse")
 public class Nurse extends Staff {
-    @Column(nullable=false)
+    @Column
     private Integer experience;
 
     public Nurse() {

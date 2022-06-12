@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 public class VaxRepository {
@@ -28,11 +29,9 @@ public class VaxRepository {
     public void save(Object o) throws VaxException {
         try {
             getSession().saveOrUpdate(o);
-        }
-        catch (ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new VaxException("Constraint Violation");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             getSession().clear();
             throw new VaxException(e.getMessage());
         }
@@ -44,33 +43,22 @@ public class VaxRepository {
 
     /* TP1 Methods */
 
-    public Patient findPatientByEmail(String email) {
-        Query query = getSession().createQuery("from Patient where email = :email");
-        query.setParameter("email", email);
-        List<Patient> patients = query.getResultList();
-        return !patients.isEmpty() ? patients.get(query.getFirstResult()) : null;
+    public Optional<Patient> findPatientByEmail(String email) {
+        return (Optional<Patient>)getSession().createQuery("from Patient where email = :email").setParameter("email", email).uniqueResultOptional();
     }
 
-    public Vaccine findVaccineByName(String name) {
-        Query query = getSession().createQuery("from Vaccine where name = :name");
-        query.setParameter("name", name);
-        List<Vaccine> vaccines = query.getResultList();
-        return !vaccines.isEmpty() ? vaccines.get(query.getFirstResult()) : null;
+    public Optional<Vaccine> findVaccineByName(String name) {
+        return (Optional<Vaccine>)getSession().createQuery("from Vaccine where name = :name").setParameter("name", name).uniqueResultOptional();
     }
 
-    public Centre findCentreByName(String name) {
-        Query query = getSession().createQuery("from Centre where name = :name");
-        query.setParameter("name", name);
-        List<Centre> centres = query.getResultList();
-        return !centres.isEmpty() ? centres.get(query.getFirstResult()) : null;
+    public Optional<Centre> findCentreByName(String name) {
+        return (Optional<Centre>)getSession().createQuery("from Centre where name = :name").setParameter("name", name).uniqueResultOptional();
+    }
+    public Optional<SupportStaff> findSupportStaffByDni(String dni) {
+        return (Optional<SupportStaff>)getSession().createQuery("from SupportStaff where dni = :dni").setParameter("dni", dni).uniqueResultOptional();
     }
 
-    public SupportStaff findSupportStaffByDni(String dni) {
-        Query query = getSession().createQuery("from SupportStaff where dni = :dni");
-        query.setParameter("dni", dni);
-        List<SupportStaff> supportStaffList = query.getResultList();
-        return !supportStaffList.isEmpty() ? supportStaffList.get(query.getFirstResult()) : null;
-    }
+
 
     public VaccinationSchedule findVaccinationScheduleById(Long id) throws VaxException {
         try {
@@ -79,8 +67,7 @@ public class VaxRepository {
                     .getSingleResult();
         } catch (NoResultException e) {
             throw new VaxException(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             getSession().clear();
             throw e;
         }
@@ -109,7 +96,7 @@ public class VaxRepository {
     }
 
     public Centre getTopShotCentre() {
-        Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(*) desc");
+        Query query = getSession().createQuery("select s.centre from Shot s group by s.centre order by count(s.centre) desc");
         query.setMaxResults(1);
         return (Centre) query.getSingleResult();
     }
@@ -135,14 +122,14 @@ public class VaxRepository {
         return shotCertificates;
     }
 
-    public List<Vaccine> getVaccineNotShot(){
+    public List<Vaccine> getVaccineNotShot() {
         Query query = getSession().createQuery("from Vaccine v where v.id not in (select s.vaccine.id from Shot s)");
         List<Vaccine> vaccine = query.getResultList();
         return vaccine;
     }
 
-    public String getLessEmployeesSupportStaffArea(){
-        Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(*) asc");
+    public String getLessEmployeesSupportStaffArea() {
+        Query query = getSession().createQuery("select sf.area from SupportStaff sf group by sf.area order by count(sf.area) asc");
         query.setMaxResults(1);
         return (String) query.getSingleResult();
     }

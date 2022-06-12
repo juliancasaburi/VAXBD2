@@ -2,6 +2,7 @@ package ar.edu.unlp.info.bd2.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Entity
-@Table(name = "Patient")
+@Table(name = "patient")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +27,14 @@ public class Patient {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "full_name", nullable = false)
     private String fullname;
 
-    @Column(nullable = false)
+    @Column(name = "day_of_birth", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dayOfBirth;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
     private Set<Shot> shots = new HashSet<>();
 
     public Patient() {
@@ -82,7 +83,7 @@ public class Patient {
         this.email = email;
     }
 
-    public void addShot(Shot shot){
+    public void addShot(Shot shot) {
         shots.add(shot);
     }
 
