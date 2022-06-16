@@ -2,9 +2,12 @@ package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.Centre;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +20,13 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
      * @return el Centre con name name.
      */
     Optional<Centre> findCentreByName(String name);
+
+    /**
+     * Recupera los n Centre con mayor cantidad de Staff
+     *
+     * @param n la cantidad de Centre
+     * @return los i Centre con mayor cantidad de Staff
+     */
+    @Query("from Centre c order by size(c.staffs) desc")
+    List<Centre> getCentresTopNStaff(int n, Pageable pageable);
 }
