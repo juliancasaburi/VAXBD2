@@ -72,7 +72,13 @@ public class SpringDataVaxService implements VaxService {
     @Transactional
     @Override
     public Shot createShot(Patient patient, Vaccine vaccine, Date date, Centre centre, Nurse nurse) throws VaxException {
-        return null;
+        Shot shot = new Shot(patient, vaccine, date, centre, nurse);
+        try {
+            shotRepository.save(shot);
+            return shot;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
     @Override
@@ -85,14 +91,28 @@ public class SpringDataVaxService implements VaxService {
         return this.vaccineRepository.findVaccineByName(name);
     }
 
+    @Transactional
     @Override
     public Centre createCentre(String name) throws VaxException {
-        return null;
+        Centre centre = new Centre(name);
+        try {
+            centreRepository.save(centre);
+            return centre;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
+    @Transactional
     @Override
     public Nurse createNurse(String dni, String fullName, Integer experience) throws VaxException {
-        return null;
+        Nurse nurse = new Nurse(dni, fullName, experience);
+        try {
+            nurseRepository.save(nurse);
+            return nurse;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
     @Override
