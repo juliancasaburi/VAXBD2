@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -127,14 +128,25 @@ public class SpringDataVaxService implements VaxService {
         }
     }
 
+    @Transactional
     @Override
     public VaccinationSchedule createVaccinationSchedule() throws VaxException {
-        return null;
+        VaccinationSchedule vaccinationSchedule = new VaccinationSchedule();
+        try {
+            vaccinationScheduleRepository.save(vaccinationSchedule);
+            return vaccinationSchedule;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
     @Override
     public VaccinationSchedule getVaccinationScheduleById(Long id) throws VaxException {
-        return null;
+        try {
+            return this.vaccinationScheduleRepository.findVaccinationScheduleById(id);
+        } catch (NoResultException e) {
+            throw new VaxException(e.getMessage());
+        }
     }
 
     @Override

@@ -6,4 +6,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VaccinationScheduleRepository extends CrudRepository<VaccinationSchedule, Long> {
+
+    /**
+     * Recupera el VaccinationSchedule con id id.
+     *
+     * @param id
+     * @return el VaccinationSchedule con id id.
+     */
+    VaccinationSchedule findVaccinationScheduleById(Long id);
 }
