@@ -115,9 +115,16 @@ public class SpringDataVaxService implements VaxService {
         }
     }
 
+    @Transactional
     @Override
     public SupportStaff createSupportStaff(String dni, String fullName, String area) throws VaxException {
-        return null;
+        SupportStaff supportStaff = new SupportStaff(dni, fullName, area);
+        try {
+            supportStaffRepository.save(supportStaff);
+            return supportStaff;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
     @Override
@@ -142,12 +149,17 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public Centre updateCentre(Centre centre) throws VaxException {
-        return null;
+        try {
+            centreRepository.save(centre);
+            return centre;
+        } catch (Exception e) {
+            throw new VaxException(e.getMessage());
+        }
     }
 
     @Override
     public Optional<SupportStaff> getSupportStaffByDni(String dni) {
-        return Optional.empty();
+        return this.supportStaffRepository.findSupportStaffByDni(dni);
     }
 
     /* TP2 Methods */
