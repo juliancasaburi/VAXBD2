@@ -132,7 +132,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public Optional<Centre> getCentreByName(String name) {
-        return Optional.empty();
+        return this.centreRepository.findCentreByName(name);
     }
 
     @Override
