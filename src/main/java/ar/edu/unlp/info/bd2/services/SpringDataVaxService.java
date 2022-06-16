@@ -60,7 +60,13 @@ public class SpringDataVaxService implements VaxService {
     @Transactional
     @Override
     public Vaccine createVaccine(String name) throws VaxException {
-        return null;
+        Vaccine vaccine = new Vaccine(name);
+        try {
+            vaccineRepository.save(vaccine);
+            return vaccine;
+        } catch (DataIntegrityViolationException e) {
+            throw new VaxException("Constraint Violation");
+        }
     }
 
     @Transactional
@@ -76,7 +82,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public Optional<Vaccine> getVaccineByName(String name) {
-        return Optional.empty();
+        return this.vaccineRepository.findVaccineByName(name);
     }
 
     @Override

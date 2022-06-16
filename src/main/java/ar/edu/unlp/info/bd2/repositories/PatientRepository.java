@@ -13,7 +13,7 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
      * Recupera el Patient con email email.
      *
      * @param email
-     * @return el TestModel cuyo title contiene title.
+     * @return el Patient con email email.
      */
     Optional<Patient> findPatientByEmail(String email);
 }
