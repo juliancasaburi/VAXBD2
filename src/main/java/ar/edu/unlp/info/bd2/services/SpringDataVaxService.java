@@ -156,11 +156,13 @@ public class SpringDataVaxService implements VaxService {
         return this.centreRepository.findCentreByName(name);
     }
 
+    @Transactional
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
         return null;
     }
 
+    @Transactional
     @Override
     public Centre updateCentre(Centre centre) throws VaxException {
         try {
@@ -224,6 +226,7 @@ public class SpringDataVaxService implements VaxService {
         return null;
     }
 
+    @Transactional
     @Override
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
         return null;
