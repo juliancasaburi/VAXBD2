@@ -159,7 +159,12 @@ public class SpringDataVaxService implements VaxService {
     @Transactional
     @Override
     public SupportStaff updateSupportStaff(SupportStaff staff) throws VaxException {
-        return null;
+        try {
+            supportStaffRepository.save(staff);
+            return staff;
+        } catch (Exception e) {
+            throw new VaxException(e.getMessage());
+        }
     }
 
     @Transactional
@@ -233,6 +238,11 @@ public class SpringDataVaxService implements VaxService {
     @Transactional
     @Override
     public VaccinationSchedule updateVaccinationSchedule(VaccinationSchedule vaccinationSchedule) throws VaxException {
-        return null;
+        try {
+            vaccinationScheduleRepository.save(vaccinationSchedule);
+            return vaccinationSchedule;
+        } catch (Exception e) {
+            throw new VaxException(e.getMessage());
+        }
     }
 }
