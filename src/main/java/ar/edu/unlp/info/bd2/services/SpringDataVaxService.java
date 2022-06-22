@@ -217,7 +217,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public List<Staff> getStaffWithName(String name) {
-        return null;
+        return this.staffRepository.getStaffByFullNameContaining(name);
     }
 
     @Override
