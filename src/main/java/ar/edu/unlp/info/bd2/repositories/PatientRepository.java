@@ -21,7 +21,6 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
     /**
      * Recupera todos los Patients.
      *
-     *
      * @return todos los Patients
      */
     List<Patient> findAll();

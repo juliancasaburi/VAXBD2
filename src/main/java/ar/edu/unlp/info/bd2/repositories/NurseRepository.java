@@ -19,8 +19,7 @@ public interface NurseRepository extends CrudRepository<Nurse, Long> {
     List<Nurse> findByExperienceGreaterThan(int years);
 
     /**
-     *
-     *
+     * Recupera los nurses que no aplicaron shots.
      *
      * @return los nurses que no aplicaron shots.
      */

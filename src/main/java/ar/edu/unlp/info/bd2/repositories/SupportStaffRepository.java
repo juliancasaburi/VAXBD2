@@ -22,14 +22,12 @@ public interface SupportStaffRepository extends CrudRepository<SupportStaff, Lon
 
 
     /**
+     * Obtiene el area de suportStaff con menor cantidad de empleados.
      *
-     *
-     *
+     * @param pageable
      * @return el area de suportStaff con menor cantidad de empleados.
      */
     @Query("select sf.area from SupportStaff sf group by sf.area order by count(sf.area) asc")
     List<String> getLessEmployeesSupportStaffArea(Pageable pageable);
-
-    //select sf.area from SupportStaff sf group by sf.area order by count(sf.area) asc
 
 }

@@ -19,6 +19,11 @@ public interface VaccineRepository extends CrudRepository<Vaccine, Long> {
      */
     Optional<Vaccine> findVaccineByName(String name);
 
+    /**
+     * Recupera las Vaccine que nunca fueron aplicadas en ningun Shot.
+     *
+     * @return las Vaccine que nunca fueron aplicadas en ningun Shot.
+     */
     @Query("from Vaccine v where v.id not in (select s.vaccine.id from Shot s)")
     List<Vaccine> getVaccineNotShot();
 }
