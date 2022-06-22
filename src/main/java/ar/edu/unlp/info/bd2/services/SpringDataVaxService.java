@@ -182,7 +182,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public List<Patient> getAllPatients() {
-        return null;
+        return this.patientRepository.findAll();
     }
 
     @Override
