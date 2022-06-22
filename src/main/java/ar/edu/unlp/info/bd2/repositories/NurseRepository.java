@@ -19,10 +19,10 @@ public interface NurseRepository extends CrudRepository<Nurse, Long> {
     List<Nurse> findByExperienceGreaterThan(int years);
 
     /**
-     * Recupera el Centre con name name.
      *
-     * @param name
-     * @return el Centre con name name.
+     *
+     *
+     * @return los nurses que no aplicaron shots.
      */
     @Query("from Nurse n where n.id not in (select s.nurse.id from Shot s)")
     List<Nurse> getNurseNotShot();

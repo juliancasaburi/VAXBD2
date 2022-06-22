@@ -210,7 +210,9 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public String getLessEmployeesSupportStaffArea() {
-        return null;
+        Pageable pageable = PageRequest.of(0, 1);
+        List<String> areas = this.supportStaffRepository.getLessEmployeesSupportStaffArea(pageable);
+        return areas.get(0);
     }
 
     @Override
