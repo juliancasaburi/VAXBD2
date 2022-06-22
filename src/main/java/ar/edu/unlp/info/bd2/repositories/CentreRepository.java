@@ -28,5 +28,15 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
      * @return los i Centre con mayor cantidad de Staff
      */
     @Query("from Centre c order by size(c.staffs) desc")
-    List<Centre> getCentresTopNStaff(int n, Pageable pageable);
+    List<Centre> getCentresTopNStaff(Pageable pageable);
+
+
+    /**
+     * Recupera el Centre con mayor cantidad de Shots
+     *
+     * @return el Centre con mayor cantidad de Shots
+     */
+    @Query("select s.centre from Shot s group by s.centre order by count(s.centre) desc")
+    List<Centre> getTopShotCentre(Pageable pageable);
+
 }

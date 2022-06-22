@@ -193,12 +193,14 @@ public class SpringDataVaxService implements VaxService {
     @Override
     public List<Centre> getCentresTopNStaff(int n) {
         Pageable pageable = PageRequest.of(0, n);
-        return this.centreRepository.getCentresTopNStaff(n, pageable);
+        return this.centreRepository.getCentresTopNStaff(pageable);
     }
 
     @Override
     public Centre getTopShotCentre() {
-        return null;
+        Pageable pageable = PageRequest.of(0, 1);
+        List<Centre> topCentres = this.centreRepository.getTopShotCentre(pageable);
+        return topCentres.get(0);
     }
 
     @Override
