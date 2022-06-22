@@ -205,7 +205,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public List<Nurse> getNurseNotShot() {
-        return null;
+        return this.nurseRepository.getNurseNotShot();
     }
 
     @Override
