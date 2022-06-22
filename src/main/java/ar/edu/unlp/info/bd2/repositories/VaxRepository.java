@@ -1,8 +1,5 @@
 package ar.edu.unlp.info.bd2.repositories;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-
 import ar.edu.unlp.info.bd2.model.Centre;
 import ar.edu.unlp.info.bd2.model.Nurse;
 import ar.edu.unlp.info.bd2.model.Patient;
@@ -16,6 +13,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

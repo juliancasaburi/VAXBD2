@@ -1,7 +1,6 @@
 package ar.edu.unlp.info.bd2.repositories;
 
 import ar.edu.unlp.info.bd2.model.Centre;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

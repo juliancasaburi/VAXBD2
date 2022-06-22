@@ -1,6 +1,5 @@
 package ar.edu.unlp.info.bd2.repositories;
 
-import ar.edu.unlp.info.bd2.model.Patient;
 import ar.edu.unlp.info.bd2.model.Vaccine;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
