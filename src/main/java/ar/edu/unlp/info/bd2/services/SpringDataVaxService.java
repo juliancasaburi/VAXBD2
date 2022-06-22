@@ -187,7 +187,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public List<Nurse> getNurseWithMoreThanNYearsExperience(int years) {
-        return null;
+        return this.nurseRepository.findByExperienceGreaterThan(years);
     }
 
     @Override
