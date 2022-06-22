@@ -227,7 +227,7 @@ public class SpringDataVaxService implements VaxService {
 
     @Override
     public List<ShotCertificate> getShotCertificatesBetweenDates(Date startDate, Date endDate) {
-        return null;
+        return this.shotCertificateRepository.getShotCertificateByDateBetween(startDate, endDate);
     }
 
     @Transactional
