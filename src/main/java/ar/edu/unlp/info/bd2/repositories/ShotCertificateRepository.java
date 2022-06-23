@@ -10,5 +10,12 @@ import java.util.List;
 @Repository
 public interface ShotCertificateRepository extends CrudRepository<ShotCertificate, Long> {
 
+    /**
+     * Recupera los ShotCertificate con date entre startDate y endDate
+     *
+     * @param startDate
+     * @param endDate
+     * @return los ShotCertificate con date entre startDate y endDate
+     */
     List<ShotCertificate> getShotCertificateByDateBetween(Date startDate, Date endDate);
 }

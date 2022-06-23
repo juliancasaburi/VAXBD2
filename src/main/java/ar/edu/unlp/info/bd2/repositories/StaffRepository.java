@@ -9,6 +9,11 @@ import java.util.List;
 @Repository
 public interface StaffRepository extends CrudRepository<Staff, Long> {
 
+    /**
+     * Recupera los Staff cuyo name contenga el string pasado por parametro name
+     *
+     * @param name
+     * @return los Staff cuyo name contenga el string pasado por parametro name
+     */
     List<Staff> getStaffByFullNameContaining(String name);
-
 }

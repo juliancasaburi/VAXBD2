@@ -21,10 +21,10 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
     Optional<Centre> findCentreByName(String name);
 
     /**
-     * Recupera los n Centre con mayor cantidad de Staff
+     * Recupera los N Centre con mayor cantidad de Staff
      *
-     * @param n la cantidad de Centre
-     * @return los i Centre con mayor cantidad de Staff
+     * @param pageable
+     * @return los N Centre con mayor cantidad de Staff
      */
     @Query("from Centre c order by size(c.staffs) desc")
     List<Centre> getCentresTopNStaff(Pageable pageable);
@@ -33,6 +33,7 @@ public interface CentreRepository extends CrudRepository<Centre, Long> {
     /**
      * Recupera el Centre con mayor cantidad de Shots
      *
+     * @param pageable
      * @return el Centre con mayor cantidad de Shots
      */
     @Query("select s.centre from Shot s group by s.centre order by count(s.centre) desc")
