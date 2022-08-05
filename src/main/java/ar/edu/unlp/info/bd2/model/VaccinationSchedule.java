@@ -1,8 +1,6 @@
 package ar.edu.unlp.info.bd2.model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,13 +21,15 @@ public class VaccinationSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
+    )
     @JoinTable(
             // default table name
             joinColumns = @JoinColumn(name = "vaccination_schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "vaccine_id")
     )
-    @Cascade(CascadeType.SAVE_UPDATE)
     @OrderColumn(name = "vaccine_order")
     private List<Vaccine> vaccines = new ArrayList<>();
 
